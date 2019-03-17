@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-#define SHADOW_FILEPATH "data/shadow"
+#define SHADOW_FILEPATH "/home/darya/projects/tender/data/shadow"
 #include <stdbool.h>
 
 struct User

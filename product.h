@@ -1,7 +1,7 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#define PRODUCTS_FILEPATH "data/product_list"
+#define PRODUCTS_FILEPATH "/home/darya/projects/tender/data/product_list"
 
 struct Product
 {

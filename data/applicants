@@ -1,0 +1,37 @@
+[Applicant]
+name="Applicant_1"
+email="qwer@gmail.com"
+phone="123432444"
+price="200"
+date="04.04.2044"
+remark="qasdffwqdfwq"
+country="Belarus"
+city="Minsk"
+street="Street, 5"
+[End]
+
+[Applicant]
+name="Applicant_1666"
+email="qwer@gmail.com"
+phone="123432444"
+price="9999200"
+date="04.04.2051"
+remark="qasdffwqdfwq"
+country="Belarus"
+city="Minsk"
+street="fhthd 000"
+[End]
+
+[Applicant]
+name="Applicant_465641"
+email="ltikl__iiul@gmail.com"
+phone="123432444"
+price="5550"
+date="04.04.2019"
+remark="SSSSwq"
+country="Belarus"
+city="Minsk"
+street="rrr 888"
+[End]
+
+
