@@ -28,7 +28,7 @@ void getUsers()
                 }
                 else if(strcmp(result[0],"admin") == 0)
                 {
-                    if(strcmp(result[1], "\"y\"\n") == 0)
+                    if(strcmp(result[1], "y\n") == 0)
                         user.admin = true;
                 }
 
