@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "applicant.h"
-#include "tools.h"
 
 
 void getApplicants()
@@ -77,4 +76,18 @@ void printApplicant(struct Applicant applicant)
     printf("country %s", applicant.addr.country);
     printf("city %s", applicant.addr.city);
     printf("street %s", applicant.addr.street);
+}
+
+void getField(char* buff, char* result[])
+{
+    int i = 0;
+    char delim[] = "=";
+
+    char *ptr = strtok(buff, delim);
+
+    while(ptr != NULL)
+    {
+        result[i++] = ptr;
+        ptr = strtok(NULL, delim);
+    }
 }

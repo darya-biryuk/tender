@@ -25,6 +25,6 @@ struct Applicant
 struct Applicant applicants[APPLICANTS_LIST_SIZE];
 void printApplicant(struct Applicant applicant);
 void getApplicants();
-
+void getField(char* buff, char* result[]);
 
 #endif // APPLICANT_H
