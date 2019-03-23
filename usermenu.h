@@ -2,5 +2,5 @@
 #define USERMENU_H
 
 void userMenu();
-
+void userHelp();
 #endif // USERMENU_H

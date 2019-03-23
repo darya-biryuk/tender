@@ -2,5 +2,6 @@
 #define ADMINMENU_H
 
 void adminMenu();
+void adminHelp();
 
 #endif // ADMINMENU_H
