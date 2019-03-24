@@ -4,6 +4,8 @@
 #define APPLICANT_FILEPATH "/home/darya/projects/tender/data/applicants"
 #define APPLICANTS_LIST_SIZE 15
 
+#include <stdbool.h>
+
 struct Address
 {
     char country[15];
@@ -23,8 +25,9 @@ struct Applicant
 };
 
 struct Applicant applicants[APPLICANTS_LIST_SIZE];
-void printApplicant(struct Applicant applicant);
+void printApplicant();
 void getApplicants();
 void getField(char* buff, char* result[]);
+bool applicantIsEmpty(struct Applicant applicant);
 
 #endif // APPLICANT_H

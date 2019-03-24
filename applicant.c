@@ -65,17 +65,34 @@ void getApplicants()
     fclose(fd);
 }
 
-void printApplicant(struct Applicant applicant)
+void printApplicant()
 {
-    printf("name %s", applicant.name);
-    printf("email %s", applicant.email);
-    printf("phone %s", applicant.phone);
-    printf("price %s", applicant.price);
-    printf("date %s", applicant.delivery_date);
-    printf("remark %s", applicant.remark);
-    printf("country %s", applicant.addr.country);
-    printf("city %s", applicant.addr.city);
-    printf("street %s", applicant.addr.street);
+    int i = 0;
+    while(i < APPLICANTS_LIST_SIZE)
+    {
+        if(applicantIsEmpty(applicants[i])) {
+            i++;
+            continue;
+        }
+        printf("Name of organization: %s\n", applicants[i].name);
+        printf("Organization email: %s\n", applicants[i].email);
+        printf("Organization phone: %s\n", applicants[i].phone);
+        printf("Price: %s\n", applicants[i].price);
+        printf("Delivery date: %s\n", applicants[i].delivery_date);
+        printf("Country: %s", applicants[i].addr.country);
+        printf("City: %s", applicants[i].addr.city);
+        printf("Street: %s", applicants[i].addr.street);
+        printf("Remark: %s\n", applicants[i].remark);
+        i++;
+    }
+}
+
+bool applicantIsEmpty(struct Applicant applicant)
+{
+    if(strlen(applicant.name) == 0)
+        return true;
+    else
+        return false;
 }
 
 void getField(char* buff, char* result[])

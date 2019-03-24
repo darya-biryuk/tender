@@ -4,6 +4,7 @@
 #include "user.h"
 #include "adminmenu.h"
 #include "usermenu.h"
+#include "product.h"
 
 struct User* login()
 {
@@ -53,6 +54,5 @@ int main()
             run(user);
             break;
     }
-
     return 0;
 }

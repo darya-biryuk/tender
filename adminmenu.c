@@ -1,9 +1,43 @@
 #include "adminmenu.h"
 #include <stdio.h>
+#include "applicant.h"
+#include "product.h"
 
 void adminMenu()
 {
-    adminHelp();
+    int er;
+    while(1)
+    {
+        adminHelp();
+        scanf("%d", &er);
+        switch(er)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            getApplicants();
+            printApplicant();
+            break;
+        case 5:
+            getProducts();
+            printProduct();
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            return;
+        default:
+            printf("Wrong choice/n");
+        }
+    }
 }
 
 void adminHelp()
