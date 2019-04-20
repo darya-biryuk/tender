@@ -6,9 +6,9 @@
 void getApplicants()
 {
     int i = 0;
-
     FILE* fd = fopen(APPLICANT_FILEPATH, "r");
     char buff[256];
+    memset(applicants, 0, sizeof(applicants));
     while(fgets(buff, 256, fd) != NULL)
     {
         if(strcmp(buff, "[Applicant]\n") == 0)
