@@ -105,6 +105,8 @@ void search()
             int j = 0;
             char mail[30];
             printf("Введите искомую электронную почту :\n");
+            fflush(stdin);
+            getchar();
             fgets(mail, sizeof(mail), stdin);
             while(j < APPLICANTS_LIST_SIZE)
             {
@@ -134,6 +136,8 @@ void search()
             int k = 0;
             char typs[20];
             printf("Введите искомый вид техники :\n");
+            fflush(stdin);
+            getchar();
             fgets(typs, sizeof(typs), stdin);
             while(k < PRODUCTS_LIST_SIZE)
             {
@@ -159,6 +163,8 @@ void search()
             int m = 0;
             char mark[20];
             printf("Введите искомого производителя :\n");
+            fflush(stdin);
+            getchar();
             fgets(mark, sizeof(mark), stdin);
             while(m < PRODUCTS_LIST_SIZE)
             {

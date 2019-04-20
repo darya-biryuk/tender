@@ -2,7 +2,7 @@
 #define USER_H
 
 #define USERS_SIZE 15
-#define SHADOW_FILEPATH "/home/darya/projects/tender/data/shadow"
+#define SHADOW_FILEPATH "../tender/data/shadow"
 #include <stdbool.h>
 
 struct User

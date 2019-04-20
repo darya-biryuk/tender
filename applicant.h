@@ -1,7 +1,7 @@
 #ifndef APPLICANT_H
 #define APPLICANT_H
 
-#define APPLICANT_FILEPATH "/home/darya/projects/tender/data/applicants"
+#define APPLICANT_FILEPATH "../tender/data/applicants"
 #define APPLICANTS_LIST_SIZE 15
 
 #include <stdbool.h>
