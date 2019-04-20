@@ -15,8 +15,6 @@ struct User
 struct User users[USERS_SIZE];
 
 void getUsers();
-void addUser(struct User);
-void deleteUser(char*);
 void printUser(struct User user);
 
 #endif // USER_H
