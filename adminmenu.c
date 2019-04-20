@@ -66,31 +66,27 @@ void adminHelp()
 void addProduct()
 {
     struct Product newProduct;
-    printf("Введите название организации\n");
+    printf("Введите вид товара\n");
     fgets(newProduct.type, sizeof(newProduct.type), stdin);
-    printf("Введите электронную почту\n");
+    printf("Введите марку товара\n");
     fgets(newProduct.brand, sizeof(newProduct.brand), stdin);
-    printf("Введите телефон\n");
+    printf("Введите модель товара\n");
     fgets(newProduct.model, sizeof(newProduct.model), stdin);
-    printf("Введите предлагаемую стоимость\n");
+    printf("Введите характеристики товара\n");
     fgets(newProduct.stats, sizeof(newProduct.stats), stdin);
-    printf("Введите дату доставки\n");
+    printf("Введите количество единиц товара\n");
     fgets(newProduct.count, sizeof(newProduct.count), stdin);
 
-    FILE* f = fopen(APPLICANT_FILEPATH, "at");
-    fprintf(f, "\n[Applicant]\n");
-    fprintf(f, "name=%s", newApplicant.name);
-    fprintf(f, "email=%s", newApplicant.email);
-    fprintf(f, "phone=%s", newApplicant.phone);
-    fprintf(f, "price=%s", newApplicant.price);
-    fprintf(f, "date=%s", newApplicant.delivery_date);
-    fprintf(f, "remark=%s", newApplicant.remark);
-    fprintf(f, "country=%s", newApplicant.addr.country);
-    fprintf(f, "city=%s", newApplicant.addr.city);
-    fprintf(f, "street=%s", newApplicant.addr.street);
+    FILE* f = fopen(PRODUCTS_FILEPATH, "at");
+    fprintf(f, "\n[Product]\n");
+    fprintf(f, "type=%s", newProduct.type);
+    fprintf(f, "brand=%s", newProduct.brand);
+    fprintf(f, "model=%s", newProduct.model);
+    fprintf(f, "stats=%s", newProduct.stats);
+    fprintf(f, "count=%s", newProduct.count);
     fprintf(f, "[End]\n");
     fclose(f);
-    getApplicants();
+    getProducts();
     return;
 }
 
@@ -98,23 +94,23 @@ void addApplicant()
 {
     struct Applicant newApplicant;
     printf("Введите название организации\n");
-    fgets(newApplicant.name, 20, stdin);
+    fgets(newApplicant.name, sizeof(newApplicant.name), stdin);
     printf("Введите электронную почту\n");
-    fgets(newApplicant.email, 20, stdin);
+    fgets(newApplicant.email, sizeof(newApplicant.email), stdin);
     printf("Введите телефон\n");
-    fgets(newApplicant.phone, 20, stdin);
+    fgets(newApplicant.phone, sizeof(newApplicant.phone), stdin);
     printf("Введите предлагаемую стоимость\n");
-    fgets(newApplicant.price, 20, stdin);
+    fgets(newApplicant.price, sizeof(newApplicant.price), stdin);
     printf("Введите дату доставки\n");
-    fgets(newApplicant.delivery_date, 20, stdin);
+    fgets(newApplicant.delivery_date, sizeof(newApplicant.delivery_date), stdin);
     printf("Введите страну\n");
-    fgets(newApplicant.addr.country, 15, stdin);
+    fgets(newApplicant.addr.country, sizeof(newApplicant.addr.country), stdin);
     printf("Введите город\n");
-    fgets(newApplicant.addr.city, 15, stdin);
+    fgets(newApplicant.addr.city, sizeof(newApplicant.addr.city), stdin);
     printf("Введите улицу\n");
-    fgets(newApplicant.addr.street, 15, stdin);
+    fgets(newApplicant.addr.street, sizeof(newApplicant.addr.street), stdin);
     printf("Введите дополнительные сведения\n");
-    fgets(newApplicant.remark, 100, stdin);
+    fgets(newApplicant.remark, sizeof(newApplicant.remark), stdin);
 
     FILE* f = fopen(APPLICANT_FILEPATH, "at");
     fprintf(f, "\n[Applicant]\n");
@@ -151,7 +147,9 @@ void addRecord()
             addApplicant();
             break;
         case 2:
-            //addProduct();
+            fflush(stdin);
+            getchar();
+            addProduct();
             break;
         case 3:
             return;
