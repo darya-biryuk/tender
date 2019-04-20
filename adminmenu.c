@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "applicant.h"
 #include "product.h"
+#include "user.h"
 
 void adminMenu()
 {
@@ -34,6 +35,7 @@ void adminMenu()
             sort();
             break;
         case 8:
+            manageUsers();
             break;
         case 9:
             getProducts();
@@ -45,6 +47,56 @@ void adminMenu()
             return;
         default:
             printf("Wrong choice/n");
+        }
+    }
+}
+
+void addUser()
+{
+    struct User newUser;
+    printf("Введите имя пользователя\n");
+    fgets(newUser.login, sizeof(newUser.login), stdin);
+    printf("Введите пароль пользователя\n");
+    fgets(newUser.password, sizeof(newUser.password), stdin);
+
+    FILE* f = fopen(SHADOW_FILEPATH, "at");
+    fprintf(f, "\n[User]\n");
+    fprintf(f, "name=%s", newUser.login);
+    fprintf(f, "password=%s", newUser.password);
+    fprintf(f, "[End]\n");
+    fclose(f);
+    getUsers();
+    return;
+}
+
+void manageUsers()
+{
+    int ch;
+    while(1)
+    {
+        printf("Выбеите операцию\n");
+        printf("1.Добавление пользователя\n");
+        printf("2.Редактирование данных пользователя\n");
+        printf("3.Удаление пользователя\n");
+        printf("4.Назад\n");
+        scanf("%d", &ch);
+        switch(ch)
+        {
+        case 1:
+            fflush(stdin);
+            getchar();
+            addUser();
+            break;
+        case 2:
+            //editUser();
+            break;
+        case 3:
+            //removeUser();
+            break;
+        case 4:
+            return;
+        default:
+            printf("Неверный выбор\n");
         }
     }
 }
