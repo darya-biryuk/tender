@@ -6,6 +6,8 @@
 void adminMenu()
 {
     int er;
+    getProducts();
+    getApplicants();
     while(1)
     {
         adminHelp();
@@ -19,26 +21,26 @@ void adminMenu()
         case 3:
             break;
         case 4:
-            getApplicants();
             printApplicant(applicants, APPLICANTS_LIST_SIZE);
             break;
         case 5:
-            getProducts();
             printProduct();
             break;
         case 6:
-            getProducts();
-            getApplicants();
             search();
             break;
         case 7:
-            getProducts();
-            getApplicants();
             sort();
             break;
         case 8:
             break;
         case 9:
+            getProducts();
+            getApplicants();
+            break;
+        case 10:
+            fflush(stdin);
+            getchar();
             return;
         default:
             printf("Wrong choice/n");
@@ -56,5 +58,6 @@ void adminHelp()
     printf("6.Search\n");
     printf("7.Sort\n");
     printf("8.User managment\n");
-    printf("9.Exit\n");
+    printf("9.Обновить списки данных\n");
+    printf("10.Exit\n");
 }

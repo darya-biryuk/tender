@@ -38,11 +38,11 @@ void run(struct User* user)
 
 int main()
 {
-    getUsers();
-    struct User* user;
-
+    struct User* user;    
+    printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
     while (true)
     {
+        getUsers();
         user = login();
         if (user == NULL)
         {
@@ -52,7 +52,6 @@ int main()
         else
             printf("Success.\n");
             run(user);
-            break;
     }
     return 0;
 }

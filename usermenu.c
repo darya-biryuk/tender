@@ -10,6 +10,8 @@ int k;
 void userMenu()
 {
     int er;
+    getApplicants();
+    getProducts();
     while(1)
     {
         userHelp();
@@ -17,26 +19,26 @@ void userMenu()
         switch(er)
         {
         case 1:
-            getApplicants();
             printApplicant(applicants, APPLICANTS_LIST_SIZE);
             break;
         case 2:
-            getProducts();
             printProduct();
             break;
         case 3:
-            getProducts();
-            getApplicants();
             search();
             break;
         case 4:
-            getProducts();
-            getApplicants();
             sort();
             break;
         case 5:
             break;
         case 6:
+            getApplicants();
+            getProducts();
+            break;
+        case 7:
+            fflush(stdin);
+            getchar();
             return;
         default:
             printf("Wrong choice/n");
@@ -51,7 +53,8 @@ void userHelp()
         printf("3.Search\n");
         printf("4.Sort\n");
         printf("5.Choose commercial offer\n");
-        printf("6.Exit\n");
+        printf("6.Обновить списки данных\n");
+        printf("7.Exit\n");
 }
 
 void search()
