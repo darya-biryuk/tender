@@ -1,5 +1,5 @@
 [Applicant]
-name="Applicant_1"
+name="BApplicant_1"
 email="qwer@gmail.com"
 phone="123432444"
 price="200"
@@ -23,7 +23,7 @@ street="fhthd 000"
 [End]
 
 [Applicant]
-name="Applicant_465641"
+name="CApplicant_465641"
 email="ltikl__iiul@gmail.com"
 phone="123432444"
 price="5550"

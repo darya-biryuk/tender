@@ -25,7 +25,7 @@ struct Applicant
 };
 
 struct Applicant applicants[APPLICANTS_LIST_SIZE];
-void printApplicant();
+void printApplicant(struct Applicant list[], int size);
 void getApplicants();
 void getField(char* buff, char* result[]);
 bool applicantIsEmpty(struct Applicant applicant);

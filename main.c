@@ -11,7 +11,7 @@ struct User* login()
     char name[30];
     char password[30];
 
-    printf("Enter name: ");
+    printf("Введите имя: ");
     fgets(name, sizeof(name), stdin);
 
     printf("Enter password: ");

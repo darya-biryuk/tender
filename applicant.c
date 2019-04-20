@@ -65,24 +65,24 @@ void getApplicants()
     fclose(fd);
 }
 
-void printApplicant()
+void printApplicant(struct Applicant list[], int size)
 {
     int i = 0;
-    while(i < APPLICANTS_LIST_SIZE)
+    while(i < size)
     {
-        if(applicantIsEmpty(applicants[i])) {
+        if(applicantIsEmpty(list[i])) {
             i++;
             continue;
         }
-        printf("Name of organization: %s\n", applicants[i].name);
-        printf("Organization email: %s\n", applicants[i].email);
-        printf("Organization phone: %s\n", applicants[i].phone);
-        printf("Price: %s\n", applicants[i].price);
-        printf("Delivery date: %s\n", applicants[i].delivery_date);
-        printf("Country: %s", applicants[i].addr.country);
-        printf("City: %s", applicants[i].addr.city);
-        printf("Street: %s", applicants[i].addr.street);
-        printf("Remark: %s\n", applicants[i].remark);
+        printf("Name of organization: %s\n", list[i].name);
+        printf("Organization email: %s\n", list[i].email);
+        printf("Organization phone: %s\n", list[i].phone);
+        printf("Price: %s\n", list[i].price);
+        printf("Delivery date: %s\n", list[i].delivery_date);
+        printf("Country: %s", list[i].addr.country);
+        printf("City: %s", list[i].addr.city);
+        printf("Street: %s", list[i].addr.street);
+        printf("Remark: %s\n", list[i].remark);
         i++;
     }
 }

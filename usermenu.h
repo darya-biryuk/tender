@@ -3,4 +3,7 @@
 
 void userMenu();
 void userHelp();
+void search();
+void sort();
+
 #endif // USERMENU_H

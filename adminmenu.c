@@ -20,15 +20,21 @@ void adminMenu()
             break;
         case 4:
             getApplicants();
-            printApplicant();
+            printApplicant(applicants, APPLICANTS_LIST_SIZE);
             break;
         case 5:
             getProducts();
             printProduct();
             break;
         case 6:
+            getProducts();
+            getApplicants();
+            search();
             break;
         case 7:
+            getProducts();
+            getApplicants();
+            sort();
             break;
         case 8:
             break;
