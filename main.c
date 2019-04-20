@@ -1,10 +1,17 @@
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 #include "applicant.h"
 #include "user.h"
 #include "adminmenu.h"
 #include "usermenu.h"
 #include "product.h"
+
+void sig_handler(int signal)
+{
+    printf("\nЗавершение работы\n");
+    exit(0);
+}
 
 struct User* login()
 {
@@ -38,10 +45,12 @@ void run(struct User* user)
 
 int main()
 {
-    struct User* user;    
+    signal(SIGINT, sig_handler);
+    signal(SIGTERM, sig_handler);
     printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
     while (true)
     {
+        struct User* user;
         getUsers();
         user = login();
         if (user == NULL)
