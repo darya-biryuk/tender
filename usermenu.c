@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "applicant.h"
+#include "adminmenu.h"
 #include "product.h"
 
 int sch = 0;
@@ -15,6 +16,7 @@ void userMenu()
     while(1)
     {
         userHelp();
+        printf(">> ");
         scanf("%d", &er);
         switch(er)
         {
@@ -39,9 +41,11 @@ void userMenu()
         case 7:
             fflush(stdin);
             getchar();
+            printf("Выход в окно авторизации.\n");
+            printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
             return;
         default:
-            printf("Wrong choice/n");
+            printf("Ошибка выбора.\n");
         }
     }
 }
@@ -67,7 +71,8 @@ void search()
         printf("2.e-mail компании\n");
         printf("3.Вид техники\n");
         printf("4.Бренд производителя\n");
-        printf("5.Выход\n");
+        printf("5.Назад\n");
+        printf(">> ");
         scanf("%d", &sw);
 
         switch(sw)
@@ -75,11 +80,10 @@ void search()
         case 1:
         {
             int i = 0;
-            char company[30];
-            printf("Введите искомую компанию :\n");
+            char company[APPLICANT_BUF_SIZE];
             fflush(stdin);
             getchar();
-            fgets(company,sizeof(company),stdin);
+            enterField("Введите искомую компанию:", company, APPLICANT_BUF_SIZE, 0);
             company[strcspn(company, "\n")] = 0;
             while(i < APPLICANTS_LIST_SIZE)
             {
@@ -99,11 +103,10 @@ void search()
         case 2:
         {
             int j = 0;
-            char mail[30];
-            printf("Введите искомую электронную почту :\n");
+            char mail[APPLICANT_BUF_SIZE];
             fflush(stdin);
             getchar();
-            fgets(mail, sizeof(mail), stdin);
+            enterField("Введите искомую электронную почту:", mail, APPLICANT_BUF_SIZE, 0);
             mail[strcspn(mail, "\n")] = 0;
             while(j < APPLICANTS_LIST_SIZE)
             {
@@ -123,11 +126,10 @@ void search()
         case 3:
         {
             int k = 0;
-            char typs[20];
-            printf("Введите искомый вид техники :\n");
+            char typs[PRODUCT_BUF_SIZE];
             fflush(stdin);
             getchar();
-            fgets(typs, sizeof(typs), stdin);
+            enterField("Введите искомый вид техники:", typs, PRODUCT_BUF_SIZE, 0);
             typs[strcspn(typs, "\n")] = 0;
             while(k < PRODUCTS_LIST_SIZE)
             {
@@ -153,11 +155,10 @@ void search()
         case 4:
         {
             int m = 0;
-            char mark[20];
-            printf("Введите искомого производителя :\n");
+            char mark[PRODUCT_BUF_SIZE];
             fflush(stdin);
             getchar();
-            fgets(mark, sizeof(mark), stdin);
+            enterField("Введите искомого производителя:", mark, PRODUCT_BUF_SIZE, 0);
             mark[strcspn(mark, "\n")] = 0;
             while(m < PRODUCTS_LIST_SIZE)
             {
@@ -181,9 +182,10 @@ void search()
             break;
         }
         case 5:
+            printf("Выход в окно авторизации.\n");
             return;
         default:
-            printf("Выберите существующее значение \n");
+            printf("Выберите существующее значение.\n");
             break;
         }
     }

@@ -3,16 +3,17 @@
 
 #define PRODUCTS_FILEPATH "../tender/data/product_list"
 #define PRODUCTS_LIST_SIZE 15
+#define PRODUCT_BUF_SIZE 64
 
 #include <stdbool.h>
 
 struct Product
 {
-    char type[10];
-    char brand[15];
-    char model[10];
-    char stats[100];    
-    char count[100];
+    char type[PRODUCT_BUF_SIZE];
+    char brand[PRODUCT_BUF_SIZE];
+    char model[PRODUCT_BUF_SIZE];
+    char stats[PRODUCT_BUF_SIZE];
+    char count[PRODUCT_BUF_SIZE];
 };
 
 struct Product products[PRODUCTS_LIST_SIZE];

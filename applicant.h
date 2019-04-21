@@ -3,24 +3,25 @@
 
 #define APPLICANT_FILEPATH "../tender/data/applicants"
 #define APPLICANTS_LIST_SIZE 15
+#define APPLICANT_BUF_SIZE 64
 
 #include <stdbool.h>
 
 struct Address
 {
-    char country[15];
-    char city[15];
-    char street[15];
+    char country[APPLICANT_BUF_SIZE];
+    char city[APPLICANT_BUF_SIZE];
+    char street[APPLICANT_BUF_SIZE];
 };
 
 struct Applicant
 {
-    char name[20];
-    char email[20];
-    char phone[20];
-    char price[20];
-    char delivery_date[20];
-    char remark[100];
+    char name[APPLICANT_BUF_SIZE];
+    char email[APPLICANT_BUF_SIZE];
+    char phone[APPLICANT_BUF_SIZE];
+    char price[APPLICANT_BUF_SIZE];
+    char delivery_date[APPLICANT_BUF_SIZE];
+    char remark[APPLICANT_BUF_SIZE];
     struct Address addr;
 };
 

@@ -3,11 +3,13 @@
 #include <string.h>
 #include "applicant.h"
 
-void getUsers()
+int getUsers()
 {
     int i = 0;
     char buff[256];
     FILE* fd = fopen(SHADOW_FILEPATH, "r");
+    if (fd == NULL)
+        return -1;
     memset(users, 0, sizeof(users));
     while(fgets(buff, 256, fd) != NULL)
     {
@@ -42,6 +44,7 @@ void getUsers()
         }
     }
     fclose(fd);
+    return 0;
 }
 
 void setUsers(struct User newUsers[], int size)

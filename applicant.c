@@ -68,12 +68,14 @@ void getApplicants()
 void printApplicant(struct Applicant list[], int size)
 {
     int i = 0;
+    int isEmpty = 1;
     while(i < size)
     {
         if(applicantIsEmpty(list[i])) {
             i++;
             continue;
         }
+        isEmpty = 0;
         printf("[Участник]\n");
         printf("Название организации: %s\n", list[i].name);
         printf("Email: %s\n", list[i].email);
@@ -87,6 +89,9 @@ void printApplicant(struct Applicant list[], int size)
         printf("\n");
         i++;
     }
+
+    if (isEmpty)
+        printf("Список пуст.\n");
 }
 
 void setApplicants(struct Applicant newApplicants[], int size)

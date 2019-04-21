@@ -80,6 +80,7 @@ void setProducts(struct Product newProducts[], int size)
 void printProduct()
 {
     int i = 0;
+    int isEmpty = 1;
     while(i < PRODUCTS_LIST_SIZE)
     {
         if(productIsEmpty(products[i]))
@@ -87,6 +88,7 @@ void printProduct()
             i++;
             continue;
         }
+        isEmpty = 0;
         printf("[Товар]\n");
         printf("Название: %s\n", products[i].type);
         printf("Бренд: %s\n", products[i].brand);
@@ -96,6 +98,9 @@ void printProduct()
         printf("\n");
         i++;
     }
+
+    if (isEmpty)
+        printf("Список пуст.\n");
 }
 
 bool productIsEmpty(struct Product product)
