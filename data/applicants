@@ -1,24 +1,12 @@
 
 [Applicant]
-name=asdf
-email=qwerty
-phone=123456
-price=123
-date=12/09/19
-remark=jdtjdtyj 543535
-country=rfv
-city=tgb
-street=yhn
-[End]
-
-[Applicant]
-name=sdfghjkl;
-email=ertyuio
-phone=zxcvbnm
-price=123456
-date=23/05/76
-remark=.mkkmk.dddg rdutj 46536
-country=trsgergs
-city=nkkjkjbjk
-street=zdzdfdg
+name=123
+email=1
+phone=1
+price=1
+date=1
+remark=a
+country=fsfsfg
+city=ffgf
+street=fsfdfd
 [End]
