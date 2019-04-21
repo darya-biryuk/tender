@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
+#include <stdlib.h>
 #include "applicant.h"
 #include "user.h"
 #include "adminmenu.h"
@@ -20,9 +21,11 @@ struct User* login()
 
     printf("Введите имя: ");
     fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = 0;
 
     printf("Enter password: ");
     fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = 0;
 
     int i = 0;
     while(i < USERS_SIZE)

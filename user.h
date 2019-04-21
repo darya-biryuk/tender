@@ -16,5 +16,6 @@ struct User users[USERS_SIZE];
 
 void getUsers();
 void printUser(struct User user);
+bool userIsEmpty(struct User user);
 
 #endif // USER_H

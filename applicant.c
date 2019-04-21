@@ -74,15 +74,17 @@ void printApplicant(struct Applicant list[], int size)
             i++;
             continue;
         }
+        printf("[Applicant]\n");
         printf("Name of organization: %s\n", list[i].name);
         printf("Organization email: %s\n", list[i].email);
         printf("Organization phone: %s\n", list[i].phone);
         printf("Price: %s\n", list[i].price);
         printf("Delivery date: %s\n", list[i].delivery_date);
-        printf("Country: %s", list[i].addr.country);
-        printf("City: %s", list[i].addr.city);
-        printf("Street: %s", list[i].addr.street);
+        printf("Country: %s\n", list[i].addr.country);
+        printf("City: %s\n", list[i].addr.city);
+        printf("Street: %s\n", list[i].addr.street);
         printf("Remark: %s\n", list[i].remark);
+        printf("\n");
         i++;
     }
 }
@@ -106,5 +108,12 @@ void getField(char* buff, char* result[])
     {
         result[i++] = ptr;
         ptr = strtok(NULL, delim);
+        if (i > 1) break;
     }
+
+    char* value = result[1];
+    value[strcspn(value, "\n")] = 0;
+    result[1] = value;
+    //int len = strlen(result[1]);
+    //if (len > 0 && result[1][len-1] == '\n') result[1][len-1] = '\0';
 }

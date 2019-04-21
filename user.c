@@ -6,19 +6,20 @@
 void getUsers()
 {
     int i = 0;
-
-    FILE* fd = fopen(SHADOW_FILEPATH, "r");
     char buff[256];
+    FILE* fd = fopen(SHADOW_FILEPATH, "r");
+    memset(users, 0, sizeof(users));
     while(fgets(buff, 256, fd) != NULL)
     {
         if(strcmp(buff, "[User]\n") == 0)
         {
             struct User user;
+            user.admin = false;
             while(fgets(buff,256,fd) != NULL)
             {
                 char* result[2];
                 getField(buff, result);
-                if(strcmp(result[0],"name") == 0)
+                if(strcmp(result[0],"login") == 0)
                 {
                     strcpy(user.login, result[1]);
                 }
@@ -28,7 +29,7 @@ void getUsers()
                 }
                 else if(strcmp(result[0],"admin") == 0)
                 {
-                    if(strcmp(result[1], "y\n") == 0)
+                    if(strcmp(result[1], "y") == 0)
                         user.admin = true;
                 }
 
@@ -45,8 +46,15 @@ void getUsers()
 
 void printUser(struct User user)
 {
-    printf("name %s", user.login);
+    printf("login %s", user.login);
     printf("password %s", user.password);
     printf("admin %d\n", user.admin);
 }
 
+bool userIsEmpty(struct User user)
+{
+    if(strlen(user.login) == 0)
+        return true;
+    else
+        return false;
+}

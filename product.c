@@ -60,11 +60,13 @@ void printProduct()
             i++;
             continue;
         }
+        printf("[Product]\n");
         printf("type %s\n", products[i].type);
         printf("brand %s\n", products[i].brand);
         printf("model %s\n", products[i].model);
         printf("stats %s\n", products[i].stats);
         printf("count %s\n", products[i].count);
+        printf("\n");
         i++;
     }
 }

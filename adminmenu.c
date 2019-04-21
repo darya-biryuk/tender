@@ -1,5 +1,6 @@
 #include "adminmenu.h"
 #include <stdio.h>
+#include <string.h>
 #include "applicant.h"
 #include "product.h"
 #include "user.h"
@@ -19,8 +20,10 @@ void adminMenu()
             addRecord();
             break;
         case 2:
+            editRecord();
             break;
         case 3:
+            removeRecord();
             break;
         case 4:
             printApplicant(applicants, APPLICANTS_LIST_SIZE);
@@ -74,24 +77,24 @@ void manageUsers()
     int ch;
     while(1)
     {
-        printf("Выбеите операцию\n");
+        printf("Выберите операцию\n");
         printf("1.Добавление пользователя\n");
         printf("2.Редактирование данных пользователя\n");
         printf("3.Удаление пользователя\n");
         printf("4.Назад\n");
         scanf("%d", &ch);
+        fflush(stdin);
+        getchar();
         switch(ch)
         {
         case 1:
-            fflush(stdin);
-            getchar();
             addUser();
             break;
         case 2:
-            //editUser();
+            editUser();
             break;
         case 3:
-            //removeUser();
+            removeUser();
             break;
         case 4:
             return;
@@ -210,3 +213,512 @@ void addRecord()
         }
     }
 }
+
+void setApplicants(struct Applicant newApplicants[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(APPLICANT_FILEPATH, "w");
+    while(i < size)
+    {
+        if(applicantIsEmpty(newApplicants[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[Applicant]\n");
+            fprintf(f, "name=%s\n", newApplicants[i].name);
+            fprintf(f, "email=%s\n", newApplicants[i].email);
+            fprintf(f, "phone=%s\n", newApplicants[i].phone);
+            fprintf(f, "price=%s\n", newApplicants[i].price);
+            fprintf(f, "date=%s\n", newApplicants[i].delivery_date);
+            fprintf(f, "remark=%s\n", newApplicants[i].remark);
+            fprintf(f, "country=%s\n", newApplicants[i].addr.country);
+            fprintf(f, "city=%s\n", newApplicants[i].addr.city);
+            fprintf(f, "street=%s\n", newApplicants[i].addr.street);
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getApplicants();
+}
+
+void removeApplicant()
+{
+    int i = 0;
+    char company[30];
+    printf("Введите компанию, которую хотите удалить :\n");
+    fgets(company,sizeof(company),stdin);
+    company[strcspn(company, "\n")] = 0;
+    while(i < APPLICANTS_LIST_SIZE)
+    {
+        if(applicantIsEmpty(applicants[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(company, applicants[i].name) == 0)
+        {
+            memset(&applicants[i], 0, sizeof(applicants[i]));
+            printf("REMOVED\n");
+        }
+        i++;
+    }
+    setApplicants(applicants, APPLICANTS_LIST_SIZE);
+}
+
+void removeProduct()
+{
+    int i = 0;
+    char typs[30];
+    printf("Введите товар, который хотите удалить :\n");
+    fgets(typs,sizeof(typs),stdin);
+    typs[strcspn(typs, "\n")] = 0;
+    while(i < PRODUCTS_LIST_SIZE)
+    {
+        if(applicantIsEmpty(applicants[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(typs, products[i].type) == 0)
+        {
+            memset(&products[i], 0, sizeof(products[i]));
+            printf("REMOVED\n");
+        }
+        i++;
+    }
+    setProducts(products, PRODUCTS_LIST_SIZE);
+}
+
+void setProducts(struct Product newProducts[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(PRODUCTS_FILEPATH, "w");
+    while(i < size)
+    {
+        if(productIsEmpty(newProducts[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[Product]\n");
+            fprintf(f, "type=%s\n", newProducts[i].type);
+            fprintf(f, "brand=%s\n", newProducts[i].brand);
+            fprintf(f, "model=%s\n", newProducts[i].model);
+            fprintf(f, "stats=%s\n", newProducts[i].stats);
+            fprintf(f, "count=%s\n", newProducts[i].count);
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getProducts();
+}
+
+void removeAllApplicants()
+{
+    int i = 0;
+     FILE* f = fopen(APPLICANT_FILEPATH, "w");
+     fclose(f);
+         memset(applicants, 0, sizeof(applicants));
+}
+
+void removeAllProducts()
+{
+    int i = 0;
+     FILE* f = fopen(PRODUCTS_FILEPATH, "w");
+     fclose(f);
+         memset(products, 0, sizeof(products));
+}
+
+void removeRecord()
+{
+    int ch;
+    while(1)
+    {
+        printf("Выберите параметр для удаления\n");
+        printf("1.Удалить участника тендера\n");
+        printf("2.Удалить продукт\n");
+        printf("3.Удалить всех участников\n");
+        printf("4.Удалить все продукты\n");
+        printf("5.Прекратить удаление\n");
+        scanf("%d", &ch);
+        switch(ch)
+        {
+        case 1:
+            fflush(stdin);
+            getchar();
+            removeApplicant();
+            break;
+        case 2:
+            fflush(stdin);
+            getchar();
+            removeProduct();
+            break;
+        case 3:
+            removeAllApplicants();
+            break;
+        case 4:
+            removeAllProducts();
+            break;
+        case 5:
+            return;
+        default:
+            printf("Неверный выбор\n");
+        }
+    }
+}
+
+void editRecord()
+{
+    int ch;
+    while(1)
+    {
+        printf("Выберите параметр для изменения\n");
+        printf("1.Изменить данные о участнике тендера\n");
+        printf("2.Изменить данные о продукте \n");
+        printf("3.Прекратить изменение\n");
+        scanf("%d", &ch);
+        switch(ch)
+        {
+        case 1:
+            fflush(stdin);
+            getchar();
+            editApplicant();
+            break;
+        case 2:
+            fflush(stdin);
+            getchar();
+            editProduct();
+            break;
+        case 3:
+            return;
+        default:
+            printf("Неверный выбор\n");
+        }
+    }
+}
+
+void editApplicant()
+{
+    int sw;
+    int i = 0;
+    char company[30];
+    printf("Введите компанию, которую хотите изменить :\n");
+    fgets(company,sizeof(company),stdin);
+    company[strcspn(company, "\n")] = 0;
+    while(i < APPLICANTS_LIST_SIZE)
+    {
+        if(applicantIsEmpty(applicants[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(company, applicants[i].name) == 0)
+        {
+    while(1)
+    {
+        printf("Выберите поле для изменения\n");
+        printf("1.Изменить название компании\n");
+        printf("2.Изменить электронную почту \n");
+        printf("3.Изменить номер телефона\n");
+        printf("4.Изменить стоимость\n");
+        printf("5.Изменить дату доставки\n");
+        printf("6.Изменить дополнительные сведения\n");
+        printf("7.Изменить адрес\n");
+        printf("8.Завершить изменение\n");
+
+        scanf("%d", &sw);
+        fflush(stdin);
+        getchar();
+        switch(sw)
+        {
+        case 1:
+        {
+            printf("Введите новое название компании :");
+            fgets(applicants[i].name, sizeof(applicants[i].name), stdin);
+            applicants[i].name[strcspn(applicants[i].name, "\n")] = 0;
+            break;
+        }
+        case 2:
+        {
+            printf("Введите новую электронную почту :");
+            fgets(applicants[i].email, sizeof(applicants[i].email), stdin);
+            applicants[i].email[strcspn(applicants[i].email, "\n")] = 0;
+            break;
+        }
+        case 3:
+        {
+            printf("Введите новое название компании :");
+            fgets(applicants[i].phone, sizeof(applicants[i].phone), stdin);
+            applicants[i].phone[strcspn(applicants[i].phone, "\n")] = 0;
+            break;
+        }
+        case 4:
+        {
+            printf("Введите новую стоимость :");
+            fgets(applicants[i].price, sizeof(applicants[i].price), stdin);
+            applicants[i].price[strcspn(applicants[i].price, "\n")] = 0;
+            break;
+        }
+        case 5:
+        {
+            printf("Введите новую дату доставки :");
+            fgets(applicants[i].delivery_date, sizeof(applicants[i].delivery_date), stdin);
+            applicants[i].delivery_date[strcspn(applicants[i].delivery_date, "\n")] = 0;
+            break;
+        }
+        case 6:
+        {
+            printf("Введите дополнительные сведения :");
+            fgets(applicants[i].remark, sizeof(applicants[i].remark), stdin);
+            applicants[i].remark[strcspn(applicants[i].remark, "\n")] = 0;
+            break;
+        }
+        case 7:
+        {
+            printf("Введите новый адрес :\n");
+            printf("Введите страну :");
+            fgets(applicants[i].addr.country, sizeof(applicants[i].addr.country), stdin);
+            applicants[i].addr.country[strcspn(applicants[i].addr.country, "\n")] = 0;
+            printf("Введите город :");
+            fgets(applicants[i].addr.city, sizeof(applicants[i].addr.city), stdin);
+            applicants[i].addr.city[strcspn(applicants[i].addr.city, "\n")] = 0;
+            printf("Введите улицу :");
+            fgets(applicants[i].addr.street, sizeof(applicants[i].addr.street), stdin);
+            applicants[i].addr.street[strcspn(applicants[i].addr.street, "\n")] = 0;
+            break;
+        }
+        case 8:
+            return;
+        }
+        setApplicants(applicants, APPLICANTS_LIST_SIZE);
+    }
+        }
+        else
+        {
+            printf("Совпадений не обнаружено.\n");
+            break;
+        }
+    }
+}
+
+void editProduct()
+{
+    int sw;
+    int i = 0;
+    char typs[30];
+    printf("Введите товар, который хотите изменить :\n");
+    fgets(typs,sizeof(typs),stdin);
+    typs[strcspn(typs, "\n")] = 0;
+    while(i < PRODUCTS_LIST_SIZE)
+    {
+        if(productIsEmpty(products[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(typs, products[i].type) == 0)
+        {
+            while(1)
+            {
+                printf("Выберите поле для изменения\n");
+                printf("1.Изменить тип товра \n");
+                printf("2.Изменить бренд товара \n");
+                printf("3.Изменить модель товара\n");
+                printf("4.Изменить характеристики товара\n");
+                printf("5.Изменить количество единиц товара\n");
+                printf("6.Завершить изменение\n");
+
+                scanf("%d", &sw);
+                fflush(stdin);
+                getchar();
+                switch(sw)
+                {
+                case 1:
+                {
+                    printf("Введите тип товара :");
+                    fgets(products[i].type, sizeof(products[i].type), stdin);
+                    products[i].type[strcspn(products[i].type, "\n")] = 0;
+                    break;
+                }
+                case 2:
+                {
+                    printf("Введите бренд товара :");
+                    fgets(products[i].brand, sizeof(products[i].brand), stdin);
+                    products[i].brand[strcspn(products[i].brand, "\n")] = 0;
+                    break;
+                }
+                case 3:
+                {
+                    printf("Введите модель товара :");
+                    fgets(products[i].model, sizeof(products[i].model), stdin);
+                    products[i].model[strcspn(products[i].model, "\n")] = 0;
+                    break;
+                }
+                case 4:
+                {
+                    printf("Введите характеристики товара :");
+                    fgets(products[i].stats, sizeof(products[i].stats), stdin);
+                    products[i].stats[strcspn(products[i].stats, "\n")] = 0;
+                    break;
+                }
+                case 5:
+                {
+                    printf("Введите количество единиц товара :");
+                    fgets(products[i].count, sizeof(products[i].count), stdin);
+                    products[i].count[strcspn(products[i].count, "\n")] = 0;
+                    break;
+                }
+                case 6:
+                    return;
+                }
+                setProducts(products, PRODUCTS_LIST_SIZE);
+            }
+        }
+            else
+            {
+                printf("Совпадений не обнаружено.\n");
+                break;
+            }
+        }
+}
+
+void editUser()
+{
+    int sw;
+    int i = 0;
+    char log[30];
+    printf("Введите имя пользователя, которого нужно изменить :\n");
+    fgets(log, sizeof(log), stdin);
+    log[strcspn(log, "\n")] = 0;
+    while(i < USERS_SIZE)
+    {
+        if(userIsEmpty(users[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(log, users[i].login) == 0)
+        {
+            while(1)
+            {
+                printf("Выберите поле для изменения\n");
+                printf("1.Изменить имя пользователя \n");
+                printf("2.Изменить пароль \n");
+                printf("3.Завершить изменение\n");
+
+                scanf("%d", &sw);
+                fflush(stdin);
+                getchar();
+                switch(sw)
+                {
+                case 1:
+                {
+                    printf("Введите новое имя пользователя :");
+                    fgets(users[i].login, sizeof(users[i].login), stdin);
+                    users[i].login[strcspn(users[i].login, "\n")] = 0;
+                    break;
+                }
+                case 2:
+                {
+                    printf("Введите новый пароль :");
+                    fgets(users[i].password, sizeof(users[i].password), stdin);
+                    users[i].password[strcspn(users[i].password, "\n")] = 0;
+                    break;
+                }
+                case 3:
+                    return;
+                }
+                setUsers(users, USERS_SIZE);
+            }
+        }
+        i++;
+    }
+    printf("Совпадений не обнаружено\n");
+}
+
+void setUsers(struct User newUsers[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(SHADOW_FILEPATH, "w");
+    while(i < size)
+    {
+        if(userIsEmpty(newUsers[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[User]\n");
+            fprintf(f, "login=%s\n", newUsers[i].login);
+            fprintf(f, "password=%s\n", newUsers[i].password);
+            if (newUsers[i].admin)
+                fprintf(f, "admin=y\n");
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getUsers();
+}
+
+
+void removeUser()
+{
+        int ch;
+        while(1)
+        {
+            printf("Выберите параметр для удаления\n");
+            printf("1.Удалить пользователя\n");
+            printf("2.Прекратить удаление\n");
+            scanf("%d", &ch);
+            fflush(stdin);
+            getchar();
+            switch(ch)
+            {
+            case 1:
+                removeUsers();
+                break;
+            case 2:
+                return;
+            default:
+                printf("Неверный выбор\n");
+            }
+        }
+}
+
+void removeUsers()
+{
+    int i = 0;
+    char log[30];
+    printf("Введите пользователя, которого нужно удалить :\n");
+    fgets(log,sizeof(log),stdin);
+    log[strcspn(log, "\n")] = 0;
+    while(i < USERS_SIZE)
+    {
+        if(userIsEmpty(users[i]))
+        {
+            i++;
+            continue;
+        }
+        if(strcmp(log, users[i].login) == 0)
+        {
+            memset(&users[i], 0, sizeof(users[i]));
+            printf("REMOVED\n");
+        }
+        i++;
+    }
+    setUsers(users, USERS_SIZE);
+}
+
+
+
+
+

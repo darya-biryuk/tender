@@ -1,47 +1,24 @@
+
 [Applicant]
-name="BApplicant_1"
-email="qwer@gmail.com"
-phone="123432444"
-price="200"
-date="04.04.2044"
-remark="qasdffwqdfwq"
-country="Belarus"
-city="Minsk"
-street="Street, 5"
+name=asdf
+email=qwerty
+phone=123456
+price=123
+date=12/09/19
+remark=jdtjdtyj 543535
+country=rfv
+city=tgb
+street=yhn
 [End]
 
 [Applicant]
-name="Applicant_1666"
-email="qwer@gmail.com"
-phone="123432444"
-price="9999200"
-date="04.04.2051"
-remark="qasdffwqdfwq"
-country="Belarus"
-city="Minsk"
-street="fhthd 000"
-[End]
-
-[Applicant]
-name="CApplicant_465641"
-email="ltikl__iiul@gmail.com"
-phone="123432444"
-price="5550"
-date="04.04.2019"
-remark="SSSSwq"
-country="Belarus"
-city="Minsk"
-street="rrr 888"
-[End]
-
-[Applicant]
-name=jimjmjjj
-email=kkhhhddy12544
-phone=654333
-price=56667
-date=23/01/19
-remark=asdfghj xxxxxxxxxxxxxxxxxxxxx 454
-country=iuuify
-city=zxxxxxxxxxxxx
-street=nnnnnnnn112
+name=sdfghjkl;
+email=ertyuio
+phone=zxcvbnm
+price=123456
+date=23/05/76
+remark=.mkkmk.dddg rdutj 46536
+country=trsgergs
+city=nkkjkjbjk
+street=zdzdfdg
 [End]
