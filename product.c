@@ -50,6 +50,33 @@ void getProducts()
     fclose(fd);
 }
 
+void setProducts(struct Product newProducts[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(PRODUCTS_FILEPATH, "w");
+    while(i < size)
+    {
+        if(productIsEmpty(newProducts[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[Product]\n");
+            fprintf(f, "type=%s\n", newProducts[i].type);
+            fprintf(f, "brand=%s\n", newProducts[i].brand);
+            fprintf(f, "model=%s\n", newProducts[i].model);
+            fprintf(f, "stats=%s\n", newProducts[i].stats);
+            fprintf(f, "count=%s\n", newProducts[i].count);
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getProducts();
+}
+
 void printProduct()
 {
     int i = 0;
@@ -60,12 +87,12 @@ void printProduct()
             i++;
             continue;
         }
-        printf("[Product]\n");
-        printf("type %s\n", products[i].type);
-        printf("brand %s\n", products[i].brand);
-        printf("model %s\n", products[i].model);
-        printf("stats %s\n", products[i].stats);
-        printf("count %s\n", products[i].count);
+        printf("[Товар]\n");
+        printf("Название: %s\n", products[i].type);
+        printf("Бренд: %s\n", products[i].brand);
+        printf("Модель: %s\n", products[i].model);
+        printf("Характеристики: %s\n", products[i].stats);
+        printf("Количество: %s\n", products[i].count);
         printf("\n");
         i++;
     }

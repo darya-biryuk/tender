@@ -44,11 +44,39 @@ void getUsers()
     fclose(fd);
 }
 
+void setUsers(struct User newUsers[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(SHADOW_FILEPATH, "w");
+    while(i < size)
+    {
+        if(userIsEmpty(newUsers[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[User]\n");
+            fprintf(f, "login=%s\n", newUsers[i].login);
+            fprintf(f, "password=%s\n", newUsers[i].password);
+            if (newUsers[i].admin)
+                fprintf(f, "admin=y\n");
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getUsers();
+}
+
 void printUser(struct User user)
 {
-    printf("login %s", user.login);
-    printf("password %s", user.password);
-    printf("admin %d\n", user.admin);
+    printf("[Пользователь]\n");
+    printf("Логин: %s", user.login);
+    printf("Пароль: %s", user.password);
+    printf("Уровень доступа: %d\n", user.admin);
+    printf("\n");
 }
 
 bool userIsEmpty(struct User user)

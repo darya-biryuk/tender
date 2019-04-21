@@ -74,19 +74,50 @@ void printApplicant(struct Applicant list[], int size)
             i++;
             continue;
         }
-        printf("[Applicant]\n");
-        printf("Name of organization: %s\n", list[i].name);
-        printf("Organization email: %s\n", list[i].email);
-        printf("Organization phone: %s\n", list[i].phone);
-        printf("Price: %s\n", list[i].price);
-        printf("Delivery date: %s\n", list[i].delivery_date);
-        printf("Country: %s\n", list[i].addr.country);
-        printf("City: %s\n", list[i].addr.city);
-        printf("Street: %s\n", list[i].addr.street);
-        printf("Remark: %s\n", list[i].remark);
+        printf("[Участник]\n");
+        printf("Название организации: %s\n", list[i].name);
+        printf("Email: %s\n", list[i].email);
+        printf("Телефон: %s\n", list[i].phone);
+        printf("Цена: %s\n", list[i].price);
+        printf("Дата доставки: %s\n", list[i].delivery_date);
+        printf("Страна: %s\n", list[i].addr.country);
+        printf("Город: %s\n", list[i].addr.city);
+        printf("Улица: %s\n", list[i].addr.street);
+        printf("Дополнительно: %s\n", list[i].remark);
         printf("\n");
         i++;
     }
+}
+
+void setApplicants(struct Applicant newApplicants[], int size)
+{
+    int i = 0;
+    FILE* f = fopen(APPLICANT_FILEPATH, "w");
+    while(i < size)
+    {
+        if(applicantIsEmpty(newApplicants[i]))
+        {
+            i++;
+            continue;
+        }
+        else
+        {
+            fprintf(f, "\n[Applicant]\n");
+            fprintf(f, "name=%s\n", newApplicants[i].name);
+            fprintf(f, "email=%s\n", newApplicants[i].email);
+            fprintf(f, "phone=%s\n", newApplicants[i].phone);
+            fprintf(f, "price=%s\n", newApplicants[i].price);
+            fprintf(f, "date=%s\n", newApplicants[i].delivery_date);
+            fprintf(f, "remark=%s\n", newApplicants[i].remark);
+            fprintf(f, "country=%s\n", newApplicants[i].addr.country);
+            fprintf(f, "city=%s\n", newApplicants[i].addr.city);
+            fprintf(f, "street=%s\n", newApplicants[i].addr.street);
+            fprintf(f, "[End]\n");
+        }
+        i++;
+    }
+    fclose(f);
+    getApplicants();
 }
 
 bool applicantIsEmpty(struct Applicant applicant)
@@ -114,6 +145,5 @@ void getField(char* buff, char* result[])
     char* value = result[1];
     value[strcspn(value, "\n")] = 0;
     result[1] = value;
-    //int len = strlen(result[1]);
-    //if (len > 0 && result[1][len-1] == '\n') result[1][len-1] = '\0';
+    return;
 }

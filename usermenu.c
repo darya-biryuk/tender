@@ -48,13 +48,13 @@ void userMenu()
 
 void userHelp()
 {
-        printf("1.Print applicants\n");
-        printf("2.Print products\n");
-        printf("3.Search\n");
-        printf("4.Sort\n");
-        printf("5.Choose commercial offer\n");
+        printf("1.Вывести список участников\n");
+        printf("2.Вывести список товаров\n");
+        printf("3.Поиск\n");
+        printf("4.Сортировка\n");
+        printf("5.Выбрать предложение (задание)\n");
         printf("6.Обновить списки данных\n");
-        printf("7.Exit\n");
+        printf("7.Выход\n");
 }
 
 void search()
@@ -80,6 +80,7 @@ void search()
             fflush(stdin);
             getchar();
             fgets(company,sizeof(company),stdin);
+            company[strcspn(company, "\n")] = 0;
             while(i < APPLICANTS_LIST_SIZE)
             {
                 if(applicantIsEmpty(applicants[i]))
@@ -89,15 +90,7 @@ void search()
                 }
                 if(strcmp(company, applicants[i].name) == 0)
                 {
-                    printf("Name of organization: %s\n", applicants[i].name);
-                    printf("Organization email: %s\n", applicants[i].email);
-                    printf("Organization phone: %s\n", applicants[i].phone);
-                    printf("Price: %s\n", applicants[i].price);
-                    printf("Delivery date: %s\n", applicants[i].delivery_date);
-                    printf("Country: %s", applicants[i].addr.country);
-                    printf("City: %s", applicants[i].addr.city);
-                    printf("Street: %s", applicants[i].addr.street);
-                    printf("Remark: %s\n", applicants[i].remark);
+                    printApplicant(&applicants[i], 1);
                 }
                 i++;
             }
@@ -111,6 +104,7 @@ void search()
             fflush(stdin);
             getchar();
             fgets(mail, sizeof(mail), stdin);
+            mail[strcspn(mail, "\n")] = 0;
             while(j < APPLICANTS_LIST_SIZE)
             {
                 if(applicantIsEmpty(applicants[j]))
@@ -120,15 +114,7 @@ void search()
                 }
                 if(strcmp(mail, applicants[j].email) == 0)
                 {
-                    printf("Name of organization: %s\n", applicants[j].name);
-                    printf("Organization email: %s\n", applicants[j].email);
-                    printf("Organization phone: %s\n", applicants[j].phone);
-                    printf("Price: %s\n", applicants[j].price);
-                    printf("Delivery date: %s\n", applicants[j].delivery_date);
-                    printf("Country: %s", applicants[j].addr.country);
-                    printf("City: %s", applicants[j].addr.city);
-                    printf("Street: %s", applicants[j].addr.street);
-                    printf("Remark: %s\n", applicants[j].remark);
+                    printApplicant(&applicants[j], 1);
                 }
                 j++;
             }
@@ -142,6 +128,7 @@ void search()
             fflush(stdin);
             getchar();
             fgets(typs, sizeof(typs), stdin);
+            typs[strcspn(typs, "\n")] = 0;
             while(k < PRODUCTS_LIST_SIZE)
             {
                 if(productIsEmpty(products[k]))
@@ -151,11 +138,13 @@ void search()
                 }
                 if(strcmp(typs, products[k].type) == 0)
                 {
-                    printf("type %s\n", products[k].type);
-                    printf("brand %s\n", products[k].brand);
-                    printf("model %s\n", products[k].model);
-                    printf("stats %s\n", products[k].stats);
-                    printf("count %s\n", products[k].count);
+                    printf("[Товар]\n");
+                    printf("Название: %s\n", products[k].type);
+                    printf("Бренд: %s\n", products[k].brand);
+                    printf("Модель: %s\n", products[k].model);
+                    printf("Характеристики: %s\n", products[k].stats);
+                    printf("Количество: %s\n", products[k].count);
+                    printf("\n");
                 }
                 k++;
             }
@@ -169,6 +158,7 @@ void search()
             fflush(stdin);
             getchar();
             fgets(mark, sizeof(mark), stdin);
+            mark[strcspn(mark, "\n")] = 0;
             while(m < PRODUCTS_LIST_SIZE)
             {
                 if(productIsEmpty(products[m]))
@@ -178,11 +168,13 @@ void search()
                 }
                 if(strcmp(mark, products[m].brand) == 0)
                 {
-                    printf("type %s\n", products[m].type);
-                    printf("brand %s\n", products[m].brand);
-                    printf("model %s\n", products[m].model);
-                    printf("stats %s\n", products[m].stats);
-                    printf("count %s\n", products[m].count);
+                    printf("[Товар]\n");
+                    printf("Название: %s\n", products[m].type);
+                    printf("Бренд: %s\n", products[m].brand);
+                    printf("Модель: %s\n", products[m].model);
+                    printf("Характеристики: %s\n", products[m].stats);
+                    printf("Количество: %s\n", products[m].count);
+                    printf("\n");
                 }
                 m++;
             }

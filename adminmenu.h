@@ -8,25 +8,24 @@
 
 void adminMenu();
 void adminHelp();
+
 void addRecord();
-void addApplicant();
-void addProduct();
-void addUser();
-void removeRecord();
-void removeApplicant();
-void removeProduct();
-void removeUser();
 void editRecord();
-void editApplicant();
-void editProduct();
-void editUser();
+void removeRecord();
+
 void manageUsers();
-void setApplicants(struct Applicant newApplicants[], int size);
-void setProducts(struct Product products[], int size);
+void addUser();
+void editUser();
+void removeUser();
+
+void addApplicant();
+void editApplicant();
+void removeApplicant();
 void removeAllApplicants();
+
+void addProduct();
+void editProduct();
+void removeProduct();
 void removeAllProducts();
-void setUsers(struct User newUsers[], int size);
-void removeUsers();
-void removeAllUsers();
 
 #endif // ADMINMENU_H

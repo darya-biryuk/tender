@@ -18,6 +18,7 @@ struct Product
 struct Product products[PRODUCTS_LIST_SIZE];
 void printProduct();
 void getProducts();
+void setProducts(struct Product products[], int size);
 void getField(char* buff, char* result[]);
 bool productIsEmpty(struct Product product);
 

@@ -15,6 +15,7 @@ struct User
 struct User users[USERS_SIZE];
 
 void getUsers();
+void setUsers(struct User newUsers[], int size);
 void printUser(struct User user);
 bool userIsEmpty(struct User user);
 
