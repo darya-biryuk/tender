@@ -91,7 +91,7 @@ void printApplicant(struct Applicant list[], int size)
     }
 
     if (isEmpty)
-        printf("Список пуст.\n");
+        printf("Список пуст.\n\n");
 }
 
 void setApplicants(struct Applicant newApplicants[], int size)

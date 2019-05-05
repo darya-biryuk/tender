@@ -16,6 +16,7 @@ void adminMenu()
         adminHelp();
         printf(">> ");
         scanf("%d", &er);
+        system("clear");
         switch(er)
         {
         case 1:
@@ -49,8 +50,7 @@ void adminMenu()
         case 10:
             fflush(stdin);
             getchar();
-            printf("Выход в окно авторизации.\n");
-            printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
+            printf("Выход в окно авторизации.\n\n");
             return;
         default:
             printf("Ошибка выбора.\n");
@@ -103,6 +103,7 @@ void manageUsers()
         scanf("%d", &ch);
         fflush(stdin);
         getchar();
+        system("clear");
         switch(ch)
         {
         case 1:
@@ -164,13 +165,15 @@ void enterField(const char* message, char* field, int size, int flags)
 {
     while (strlen(field) <= 1)
     {
+        system("clear");
         printf("%s\n", message);
         fgets(field, size, stdin);
         if (strlen(field) >= size - 1)
         {
             clearStdin();
             memset(field, 0, size);
-            printf("Превышен допустимый размер ввода.\n");
+            system("clear");
+            printf("Превышен допустимый размер ввода.\n\n");
             continue;
         }
         if (flags & NO_LETTERS)
@@ -178,7 +181,8 @@ void enterField(const char* message, char* field, int size, int flags)
             if (!checkNoLetters(field))
             {
                 memset(field, 0, size);
-                printf("Ошибка ввода, поле содержит буквы.\n");
+                system("clear");
+                printf("Ошибка ввода, поле содержит буквы.\n\n");
                 continue;
             }
         }
@@ -187,7 +191,8 @@ void enterField(const char* message, char* field, int size, int flags)
             if (!checkNoNumbers(field))
             {
                 memset(field, 0, size);
-                printf("Ошибка ввода, поле содержит цифры.\n");
+                system("clear");
+                printf("Ошибка ввода, поле содержит цифры.\n\n");
                 continue;
             }
         }
@@ -285,6 +290,7 @@ void addRecord()
         printf("3.Назад\n");
         printf(">> ");
         scanf("%d", &ch);
+        system("clear");
         switch(ch)
         {
         case 1:

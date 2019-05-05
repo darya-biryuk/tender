@@ -18,6 +18,7 @@ void userMenu()
         userHelp();
         printf(">> ");
         scanf("%d", &er);
+        system("clear");
         switch(er)
         {
         case 1:
@@ -37,15 +38,15 @@ void userMenu()
         case 6:
             getApplicants();
             getProducts();
+            printf("Списки данных обновлены.\n\n");
             break;
         case 7:
             fflush(stdin);
             getchar();
-            printf("Выход в окно авторизации.\n");
-            printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
+            printf("Выход в окно авторизации.\n\n");
             return;
         default:
-            printf("Ошибка выбора.\n");
+            printf("Ошибка выбора.\n\n");
         }
     }
 }
@@ -74,17 +75,18 @@ void search()
         printf("5.Назад\n");
         printf(">> ");
         scanf("%d", &sw);
-
+        system("clear");
         switch(sw)
         {
         case 1:
         {
-            int i = 0;
-            char company[APPLICANT_BUF_SIZE];
+            char company[APPLICANT_BUF_SIZE] = "\0";
             fflush(stdin);
             getchar();
             enterField("Введите искомую компанию:", company, APPLICANT_BUF_SIZE, 0);
             company[strcspn(company, "\n")] = 0;
+            system("clear");
+            int i = 0, j = 0;
             while(i < APPLICANTS_LIST_SIZE)
             {
                 if(applicantIsEmpty(applicants[i]))
@@ -95,50 +97,58 @@ void search()
                 if(strcmp(company, applicants[i].name) == 0)
                 {
                     printApplicant(&applicants[i], 1);
+                    j++;
                 }
                 i++;
             }
+            if (j == 0)
+                printf("Ничего не найдено.\n\n");
             break;
         }
         case 2:
         {
-            int j = 0;
-            char mail[APPLICANT_BUF_SIZE];
+            char mail[APPLICANT_BUF_SIZE] = "\0";
             fflush(stdin);
             getchar();
             enterField("Введите искомую электронную почту:", mail, APPLICANT_BUF_SIZE, 0);
             mail[strcspn(mail, "\n")] = 0;
-            while(j < APPLICANTS_LIST_SIZE)
+            system("clear");
+            int i = 0, j = 0;
+            while(i < APPLICANTS_LIST_SIZE)
             {
                 if(applicantIsEmpty(applicants[j]))
                 {
-                    j++;
+                    i++;
                     continue;
                 }
                 if(strcmp(mail, applicants[j].email) == 0)
                 {
-                    printApplicant(&applicants[j], 1);
+                    printApplicant(&applicants[i], 1);
+                    j++;
                 }
-                j++;
+                i++;
             }
+            if (j == 0)
+                printf("Ничего не найдено.\n\n");
             break;
         }
         case 3:
         {
-            int k = 0;
-            char typs[PRODUCT_BUF_SIZE];
+            char typs[PRODUCT_BUF_SIZE] = "\0";
             fflush(stdin);
             getchar();
             enterField("Введите искомый вид техники:", typs, PRODUCT_BUF_SIZE, 0);
             typs[strcspn(typs, "\n")] = 0;
-            while(k < PRODUCTS_LIST_SIZE)
+            system("clear");
+            int i = 0, j = 0;
+            while(i < PRODUCTS_LIST_SIZE)
             {
-                if(productIsEmpty(products[k]))
+                if(productIsEmpty(products[i]))
                 {
-                    k++;
+                    i++;
                     continue;
                 }
-                if(strcmp(typs, products[k].type) == 0)
+                if(strcmp(typs, products[i].type) == 0)
                 {
                     printf("[Товар]\n");
                     printf("Название: %s\n", products[k].type);
@@ -147,45 +157,51 @@ void search()
                     printf("Характеристики: %s\n", products[k].stats);
                     printf("Количество: %s\n", products[k].count);
                     printf("\n");
+                    j++;
                 }
-                k++;
+                i++;
             }
+            if (j == 0)
+                printf("Ничего не найдено.\n\n");
             break;
         }
         case 4:
         {
-            int m = 0;
-            char mark[PRODUCT_BUF_SIZE];
+            char mark[PRODUCT_BUF_SIZE] = "\0";
             fflush(stdin);
             getchar();
             enterField("Введите искомого производителя:", mark, PRODUCT_BUF_SIZE, 0);
             mark[strcspn(mark, "\n")] = 0;
-            while(m < PRODUCTS_LIST_SIZE)
+            system("clear");
+            int i = 0, j = 0;
+            while(i < PRODUCTS_LIST_SIZE)
             {
-                if(productIsEmpty(products[m]))
+                if(productIsEmpty(products[i]))
                 {
-                    m++;
+                    i++;
                     continue;
                 }
-                if(strcmp(mark, products[m].brand) == 0)
+                if(strcmp(mark, products[i].brand) == 0)
                 {
                     printf("[Товар]\n");
-                    printf("Название: %s\n", products[m].type);
-                    printf("Бренд: %s\n", products[m].brand);
-                    printf("Модель: %s\n", products[m].model);
-                    printf("Характеристики: %s\n", products[m].stats);
-                    printf("Количество: %s\n", products[m].count);
+                    printf("Название: %s\n", products[i].type);
+                    printf("Бренд: %s\n", products[i].brand);
+                    printf("Модель: %s\n", products[i].model);
+                    printf("Характеристики: %s\n", products[i].stats);
+                    printf("Количество: %s\n", products[i].count);
                     printf("\n");
+                    j++;
                 }
-                m++;
+                i++;
             }
+            if (j == 0)
+                printf("Ничего не найдено.\n\n");
             break;
         }
         case 5:
-            printf("Выход в окно авторизации.\n");
             return;
         default:
-            printf("Выберите существующее значение.\n");
+            printf("Выберите существующее значение.\n\n");
             break;
         }
     }
@@ -195,6 +211,14 @@ void sort()
 {
     struct Applicant list[APPLICANTS_LIST_SIZE];
     memcpy(list, applicants, sizeof(list));
+    int listSize = 0;
+    for (int i = 0; i < APPLICANTS_LIST_SIZE; i++)
+        if (!applicantIsEmpty(list[i]))
+            listSize++;
+    if (!listSize) {
+        printf("Список пуст.\n\n");
+        return;
+    }
     for(int i = 0; i < APPLICANTS_LIST_SIZE; i++)
         for(int j = APPLICANTS_LIST_SIZE - 1; j >= i; j--)
             if(strcmp(list[i].name, list[j].name) > 0)

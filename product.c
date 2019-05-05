@@ -100,7 +100,7 @@ void printProduct()
     }
 
     if (isEmpty)
-        printf("Список пуст.\n");
+        printf("Список пуст.\n\n");
 }
 
 bool productIsEmpty(struct Product product)

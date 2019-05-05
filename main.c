@@ -72,12 +72,14 @@ void run(struct User* user)
     bool admin = user->admin;
     if (admin)
     {
-        printf("\nВыполнен вход в систему (администратор).\n");
+        system("clear");
+        printf("Выполнен вход в систему (администратор).\n\n");
         adminMenu();
     }
     else
     {
-        printf("\nВыполнен вход в систему (пользователь).\n");
+        system("clear");
+        printf("Выполнен вход в систему (пользователь).\n\n");
         userMenu();
     }
 }
@@ -86,9 +88,9 @@ int main()
 {
     signal(SIGINT, sig_handler);
     signal(SIGTERM, sig_handler);
-    printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
     while (true)
     {
+        printf("Нажмите комбинацию клавиш Ctrl+C для выхода из программы.\n");
         struct User* user;
         if (getUsers() < 0)
         {
@@ -98,7 +100,8 @@ int main()
         user = login();
         if (user == NULL)
         {
-            printf("Неудачная попытка.\n");
+            system("clear");
+            printf("Неудачная попытка.\n\n");
             continue;
         }
         else
