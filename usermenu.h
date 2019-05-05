@@ -2,6 +2,7 @@
 #define USERMENU_H
 
 #include <stdlib.h>
+#include "systools.h"
 
 void userMenu();
 void userHelp();

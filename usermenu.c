@@ -46,6 +46,7 @@ void userMenu()
             printf("Выход в окно авторизации.\n\n");
             return;
         default:
+            clearStdin();
             printf("Ошибка выбора.\n\n");
         }
     }
@@ -201,6 +202,7 @@ void search()
         case 5:
             return;
         default:
+            clearStdin();
             printf("Выберите существующее значение.\n\n");
             break;
         }

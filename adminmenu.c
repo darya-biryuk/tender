@@ -46,6 +46,7 @@ void adminMenu()
         case 9:
             getProducts();
             getApplicants();
+            printf("Списки данных обновлены.\n\n");
             break;
         case 10:
             fflush(stdin);
@@ -53,7 +54,8 @@ void adminMenu()
             printf("Выход в окно авторизации.\n\n");
             return;
         default:
-            printf("Ошибка выбора.\n");
+            clearStdin();
+            printf("Ошибка выбора.\n\n");
         }
     }
 }
@@ -70,7 +72,8 @@ void addUser()
     {
         if (strcmp(users[i].login, newUser.login) == 0)
         {
-            printf("Ошибка. Пользователь с таким именем уже существует.\n");
+            system("clear");
+            printf("Ошибка. Пользователь с таким именем уже существует.\n\n");
             return;
         }
         i++;
@@ -86,6 +89,7 @@ void addUser()
     fprintf(f, "[End]\n");
     fclose(f);
     getUsers();
+    printf("Пользователь успешно добавлен.\n\n");
     return;
 }
 
@@ -118,7 +122,9 @@ void manageUsers()
         case 4:
             return;
         default:
-            printf("Неверный выбор.\n");
+            system("clear");
+            clearStdin();
+            printf("Неверный выбор.\n\n");
         }
     }
 }
@@ -163,11 +169,12 @@ int checkNoNumbers(char str1[])
 
 void enterField(const char* message, char* field, int size, int flags)
 {
+    memset(field, 0, size);
     while (strlen(field) <= 1)
     {
-        system("clear");
         printf("%s\n", message);
         fgets(field, size, stdin);
+        system("clear");
         if (strlen(field) >= size - 1)
         {
             clearStdin();
@@ -211,7 +218,7 @@ void addProduct()
     {
         if (strcmp(products[i].type, newProduct.type) == 0)
         {
-            printf("Ошибка. Товар с таким названием уже существует.\n");
+            printf("Ошибка. Товар с таким названием уже существует.\n\n");
             return;
         }
         i++;
@@ -247,7 +254,7 @@ void addApplicant()
     {
         if (strcmp(applicants[i].name, newApplicant.name) == 0)
         {
-            printf("Ошибка. Организация с таким названием уже существует.\n");
+            printf("Ошибка. Организация с таким названием уже существует.\n\n");
             return;
         }
         i++;
@@ -306,7 +313,9 @@ void addRecord()
         case 3:
             return;
         default:
-            printf("Неверный выбор.\n");
+            system("clear");
+            clearStdin();
+            printf("Неверный выбор.\n\n");
         }
     }
 }
@@ -315,6 +324,7 @@ void removeApplicant()
 {
     int i = 0;
     char company[APPLICANT_BUF_SIZE];
+    system("clear");
     enterField("Введите компанию, которую хотите удалить:", company, APPLICANT_BUF_SIZE, 0);
     company[strcspn(company, "\n")] = 0;
     while(i < APPLICANTS_LIST_SIZE)
@@ -328,17 +338,19 @@ void removeApplicant()
         {
             memset(&applicants[i], 0, sizeof(applicants[i]));
             setApplicants(applicants, APPLICANTS_LIST_SIZE);
+            printf("Компания удалена.\n\n");
             return;
         }
         i++;
     }
-    printf("Компания с заданным названием не найдена.\n");
+    printf("Компания с заданным названием не найдена.\n\n");
 }
 
 void removeProduct()
 {
     int i = 0;
     char typs[PRODUCT_BUF_SIZE];
+    system("clear");
     enterField("Введите товар, который хотите удалить:", typs, PRODUCT_BUF_SIZE, 0);
     typs[strcspn(typs, "\n")] = 0;
     while(i < PRODUCTS_LIST_SIZE)
@@ -352,11 +364,12 @@ void removeProduct()
         {
             memset(&products[i], 0, sizeof(products[i]));
             setProducts(products, PRODUCTS_LIST_SIZE);
+            printf("Товар удален.\n\n");
             return;
         }
         i++;
     }
-    printf("Товар с заданным названием не найден.\n");
+    printf("Товар с заданным названием не найден.\n\n");
 }
 
 void removeAllApplicants()
@@ -401,14 +414,21 @@ void removeRecord()
             break;
         case 3:
             removeAllApplicants();
+            system("clear");
+            printf("Все участники были удалены.\n\n");
             break;
         case 4:
             removeAllProducts();
+            system("clear");
+            printf("Все товары были удалены.\n\n");
             break;
         case 5:
+            system("clear");
             return;
         default:
-            printf("Неверный выбор.\n");
+            system("clear");
+            clearStdin();
+            printf("Неверный выбор.\n\n");
         }
     }
 }
@@ -437,9 +457,12 @@ void editRecord()
             editProduct();
             break;
         case 3:
+            system("clear");
             return;
         default:
-            printf("Неверный выбор.\n");
+            system("clear");
+            clearStdin();
+            printf("Неверный выбор.\n\n");
         }
     }
 }
@@ -449,6 +472,7 @@ void editApplicant()
     int sw;
     int i = 0;
     char company[APPLICANT_BUF_SIZE];
+    system("clear");
     enterField("Введите компанию, которую хотите изменить:", company, APPLICANT_BUF_SIZE, 0);
     company[strcspn(company, "\n")] = 0;
     while(i < APPLICANTS_LIST_SIZE)
@@ -510,14 +534,16 @@ void editApplicant()
                     applicants[i].addr.street[strcspn(applicants[i].addr.street, "\n")] = 0;
                 break;
                 case 8:
+                    system("clear");
                     return;
                 }
                 setApplicants(applicants, APPLICANTS_LIST_SIZE);
+                printf("Изменения сохранены.\n\n");
             }
         }
         i++;
     }
-    printf("Совпадений не обнаружено.\n");
+    printf("Совпадений не обнаружено.\n\n");
     return;
 }
 
@@ -526,6 +552,7 @@ void editProduct()
     int sw;
     int i = 0;
     char typs[PRODUCT_BUF_SIZE];
+    system("clear");
     enterField("Введите товар, который хотите изменить:", typs, PRODUCT_BUF_SIZE, 0);
     typs[strcspn(typs, "\n")] = 0;
     while(i < PRODUCTS_LIST_SIZE)
@@ -550,6 +577,7 @@ void editProduct()
                 scanf("%d", &sw);
                 fflush(stdin);
                 getchar();
+                system("clear");
                 switch(sw)
                 {
                 case 1:
@@ -583,14 +611,16 @@ void editProduct()
                     break;
                 }
                 case 6:
+                    system("clear");
                     return;
                 }
                 setProducts(products, PRODUCTS_LIST_SIZE);
+                printf("Изменения сохранены.\n\n");
             }
         }
         i++;
     }
-    printf("Совпадений не обнаружено.\n");
+    printf("Совпадений не обнаружено.\n\n");
     return;
 }
 
@@ -599,6 +629,7 @@ void editUser()
     int sw;
     int i = 0;
     char log[MAX_LOGIN_SIZE];
+    system("clear");
     enterField("Введите имя пользователя, которого нужно изменить:", log, MAX_LOGIN_SIZE, 0);
     log[strcspn(log, "\n")] = 0;
     while(i < USERS_SIZE)
@@ -620,6 +651,7 @@ void editUser()
                 scanf("%d", &sw);
                 fflush(stdin);
                 getchar();
+                system("clear");
                 switch(sw)
                 {
                 case 1:
@@ -635,14 +667,16 @@ void editUser()
                     break;
                 }
                 case 3:
+                    system("clear");
                     return;
                 }
                 setUsers(users, USERS_SIZE);
+                printf("Изменения сохранены");
             }
         }
         i++;
     }
-    printf("Совпадений не обнаружено.\n");
+    printf("Совпадений не обнаружено.\n\n");
     return;
 }
 
@@ -650,6 +684,7 @@ void removeUser()
 {
     int i = 0;
     char log[MAX_LOGIN_SIZE];
+    system("clear");
     enterField("Введите пользователя, которого нужно удалить:", log, MAX_LOGIN_SIZE, 0);
     log[strcspn(log, "\n")] = 0;
     while(i < USERS_SIZE)
@@ -663,9 +698,10 @@ void removeUser()
         {
             memset(&users[i], 0, sizeof(users[i]));
             setUsers(users, USERS_SIZE);
+            printf("Пользователь удален.\n\n");
             return;
         }
         i++;
     }
-    printf("Пользователь с таким именем не найден.\n");
+    printf("Пользователь с таким именем не найден.\n\n");
 }
