@@ -69,26 +69,32 @@ void printApplicant(struct Applicant list[], int size)
 {
     int i = 0;
     int isEmpty = 1;
-    while(i < size)
-    {
-        if(applicantIsEmpty(list[i])) {
+        puts("|===|======================|=====================|=======================|=========================================================|==================|===============|===========================================|");
+        puts("|   |                      |                     |                       |            Адрес огранизации                            |                  |               |                                           |");
+        puts("| № | Название организации |  Электронная почта  |    Номер телефона     |==================|=================|====================|     Стоимость    | Дата доставки |           Дополнительно                   |");
+        puts("|   |                      |                     |                       |      Страна      |      Город      |       Улица        |                  |               |                                           |");
+        puts("|===|======================|=====================|=======================|==================|=================|====================|==================|===============|===========================================|");
+        while(i < size)
+        {
+            if(applicantIsEmpty(list[i])) {
+                i++;
+                continue;
+            }
+            isEmpty = 0;
+            printf("|%-3d", i+1);
+            printf("|%*s", 22 + strlen(list[i].name)/2, list[i].name);
+            printf("|%*s", 21, list[i].email);
+            printf("|%*s", 23 , list[i].phone);
+            printf("|%*s", 18 + strlen(list[i].addr.country)/2, list[i].addr.country);
+            printf("|%*s", 17 + strlen(list[i].addr.city)/2, list[i].addr.city);
+            printf("|%*s", 20 + strlen(list[i].addr.street)/2, list[i].addr.street);
+            printf("|%*s", 18, list[i].price);
+            printf("|%*s", 15, list[i].delivery_date);
+            printf("|%*s|\n", 43 + strlen(list[i].remark)/2, list[i].remark);
+            puts("|===|======================|=====================|=======================|==================|=================|====================|==================|===============|===========================================|");
             i++;
-            continue;
         }
-        isEmpty = 0;
-        printf("[Участник]\n");
-        printf("Название организации: %s\n", list[i].name);
-        printf("Email: %s\n", list[i].email);
-        printf("Телефон: %s\n", list[i].phone);
-        printf("Цена: %s\n", list[i].price);
-        printf("Дата доставки: %s\n", list[i].delivery_date);
-        printf("Страна: %s\n", list[i].addr.country);
-        printf("Город: %s\n", list[i].addr.city);
-        printf("Улица: %s\n", list[i].addr.street);
-        printf("Дополнительно: %s\n", list[i].remark);
-        printf("\n");
-        i++;
-    }
+
 
     if (isEmpty)
         printf("Список пуст.\n\n");
