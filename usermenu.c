@@ -34,6 +34,8 @@ void userMenu()
             sort();
             break;
         case 5:
+            system("sl");
+            system("clear");
             break;
         case 6:
             getApplicants();
@@ -58,7 +60,7 @@ void userHelp()
         printf("2.Вывести список товаров\n");
         printf("3.Поиск\n");
         printf("4.Сортировка\n");
-        printf("5.Выбрать предложение (задание)\n");
+        printf("5.Запустить паровозик\n");
         printf("6.Обновить списки данных\n");
         printf("7.Выход\n");
 }
