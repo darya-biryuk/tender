@@ -81,6 +81,11 @@ void printProduct()
 {
     int i = 0;
     int isEmpty = 1;
+    puts("|===|======================|=====================|=======================|===========================================================================|==================|");
+    puts("|   |                      |                     |                       |                                                                           |                  |");
+    puts("| № |     Наименование     |       Бренд         |        Модель         |                               Характеристики                              |    Количество    |");
+    puts("|   |                      |                     |                       |                                                                           |                  |");
+    puts("|===|======================|=====================|=======================|===========================================================================|==================|");
     while(i < PRODUCTS_LIST_SIZE)
     {
         if(productIsEmpty(products[i]))
@@ -89,13 +94,13 @@ void printProduct()
             continue;
         }
         isEmpty = 0;
-        printf("[Товар]\n");
-        printf("Название: %s\n", products[i].type);
-        printf("Бренд: %s\n", products[i].brand);
-        printf("Модель: %s\n", products[i].model);
-        printf("Характеристики: %s\n", products[i].stats);
-        printf("Количество: %s\n", products[i].count);
-        printf("\n");
+        printf("|%-3d", i+1);
+        printf("|%*s", 22 + strlen(products[i].type)/2, products[i].type);
+        printf("|%*s", 21, products[i].brand);
+        printf("|%*s", 23 , products[i].model);
+        printf("|%*s", 75 + strlen(products[i].stats)/2, products[i].stats);
+        printf("|%*s|\n", 18, products[i].count);
+        puts("|===|======================|=====================|=======================|===========================================================================|==================|");
         i++;
     }
 
