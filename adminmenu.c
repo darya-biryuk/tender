@@ -263,7 +263,12 @@ void addApplicant()
     enterField("Введите электронную почту:", newApplicant.email, APPLICANT_BUF_SIZE, 0);
     enterField("Введите телефон:", newApplicant.phone, APPLICANT_BUF_SIZE, NO_LETTERS);
     enterField("Введите предлагаемую стоимость:", newApplicant.price, APPLICANT_BUF_SIZE, NO_LETTERS);
-    enterField("Введите дату доставки:", newApplicant.delivery_date, APPLICANT_BUF_SIZE, 0);
+
+    //enterField("Введите дату доставки:", newApplicant.delivery_date, APPLICANT_BUF_SIZE, 0);
+    enterField("Введите день доставки:", newApplicant.date.day, APPLICANT_BUF_SIZE, NO_LETTERS);
+    enterField("Введите месяц доставки:", newApplicant.date.month, APPLICANT_BUF_SIZE, NO_LETTERS);
+    enterField("Введите год доставки:", newApplicant.date.year, APPLICANT_BUF_SIZE, NO_LETTERS);
+
     enterField("Введите страну:", newApplicant.addr.country, APPLICANT_BUF_SIZE, NO_NUMBERS);
     enterField("Введите город:", newApplicant.addr.city, APPLICANT_BUF_SIZE, NO_NUMBERS);
     enterField("Введите улицу:", newApplicant.addr.street, APPLICANT_BUF_SIZE, NO_NUMBERS);
@@ -275,7 +280,10 @@ void addApplicant()
     fprintf(f, "email=%s", newApplicant.email);
     fprintf(f, "phone=%s", newApplicant.phone);
     fprintf(f, "price=%s", newApplicant.price);
-    fprintf(f, "date=%s", newApplicant.delivery_date);
+    fprintf(f, "day=%s", newApplicant.date.day);
+    fprintf(f, "month=%s", newApplicant.date.month);
+    fprintf(f, "year=%s", newApplicant.date.year);
+
     fprintf(f, "remark=%s", newApplicant.remark);
     fprintf(f, "country=%s", newApplicant.addr.country);
     fprintf(f, "city=%s", newApplicant.addr.city);
@@ -499,6 +507,7 @@ void editApplicant()
                 scanf("%d", &sw);
                 fflush(stdin);
                 getchar();
+                system("clear");
                 switch(sw)
                 {
                 case 1:
@@ -518,8 +527,14 @@ void editApplicant()
                     applicants[i].price[strcspn(applicants[i].price, "\n")] = 0;
                 break;
                 case 5:
-                    enterField("Введите новую дату доставки:", applicants[i].delivery_date, APPLICANT_BUF_SIZE, NO_LETTERS);
-                    applicants[i].delivery_date[strcspn(applicants[i].delivery_date, "\n")] = 0;
+                    enterField("Введите день доставки:", applicants[i].date.day, APPLICANT_BUF_SIZE, NO_LETTERS);
+                    applicants[i].date.day[strcspn(applicants[i].date.day, "\n")] = 0;
+
+                    enterField("Введите месяц доставки:", applicants[i].date.month, APPLICANT_BUF_SIZE, NO_LETTERS);
+                    applicants[i].date.month[strcspn(applicants[i].date.month, "\n")] = 0;
+
+                    enterField("Введите год доставки:", applicants[i].date.year, APPLICANT_BUF_SIZE, NO_LETTERS);
+                    applicants[i].date.year[strcspn(applicants[i].date.year, "\n")] = 0;
                 break;
                 case 6:
                     enterField("Введите дополнительные сведения:", applicants[i].remark, APPLICANT_BUF_SIZE, 0);
@@ -534,7 +549,6 @@ void editApplicant()
                     applicants[i].addr.street[strcspn(applicants[i].addr.street, "\n")] = 0;
                 break;
                 case 8:
-                    system("clear");
                     return;
                 }
                 setApplicants(applicants, APPLICANTS_LIST_SIZE);

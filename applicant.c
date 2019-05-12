@@ -34,9 +34,21 @@ void getApplicants()
                 {
                     strcpy(applicant.price, result[1]);
                 }
-                else if(strcmp(result[0],"date") == 0)
+//                else if(strcmp(result[0],"date") == 0)
+//                {
+//                    strcpy(applicant.delivery_date, result[1]);
+//                }
+                else if(strcmp(result[0],"day") == 0)
                 {
-                    strcpy(applicant.delivery_date, result[1]);
+                    strcpy(applicant.date.day, result[1]);
+                }
+                else if(strcmp(result[0],"month") == 0)
+                {
+                    strcpy(applicant.date.month, result[1]);
+                }
+                else if(strcmp(result[0],"year") == 0)
+                {
+                    strcpy(applicant.date.year, result[1]);
                 }
                 else if(strcmp(result[0],"remark") == 0)
                 {
@@ -69,11 +81,11 @@ void printApplicant(struct Applicant list[], int size)
 {
     int i = 0;
     int isEmpty = 1;
-        puts("|===|======================|=====================|=======================|=========================================================|==================|===============|===========================================|");
-        puts("|   |                      |                     |                       |            Адрес огранизации                            |                  |               |                                           |");
-        puts("| № | Название организации |  Электронная почта  |    Номер телефона     |==================|=================|====================|     Стоимость    | Дата доставки |           Дополнительно                   |");
-        puts("|   |                      |                     |                       |      Страна      |      Город      |       Улица        |                  |               |                                           |");
-        puts("|===|======================|=====================|=======================|==================|=================|====================|==================|===============|===========================================|");
+        puts("|===|======================|=====================|=======================|=========================================================|==================|================|==========================================|");
+        puts("|   |                      |                     |                       |            Адрес огранизации                            |                  | Дата доставки  |                                          |");
+        puts("| № | Название организации |  Электронная почта  |    Номер телефона     |==================|=================|====================|     Стоимость    |================|          Дополнительно                   |");
+        puts("|   |                      |                     |                       |      Страна      |      Город      |       Улица        |                  | ДД | ММ | ГГГГ |                                          |");
+        puts("|===|======================|=====================|=======================|==================|=================|====================|==================|================|==========================================|");
         while(i < size)
         {
             if(applicantIsEmpty(list[i])) {
@@ -89,9 +101,11 @@ void printApplicant(struct Applicant list[], int size)
             printf("|%*s", 17 + strlen(list[i].addr.city)/2, list[i].addr.city);
             printf("|%*s", 20 + strlen(list[i].addr.street)/2, list[i].addr.street);
             printf("|%*s", 18, list[i].price);
-            printf("|%*s", 15, list[i].delivery_date);
-            printf("|%*s|\n", 43 + strlen(list[i].remark)/2, list[i].remark);
-            puts("|===|======================|=====================|=======================|==================|=================|====================|==================|===============|===========================================|");
+            printf("|%*s", 4 , list[i].date.day);
+            printf("|%*s", 4 , list[i].date.month);
+            printf("|%*s", 6 , list[i].date.year);
+            printf("|%*s|\n", 42 + strlen(list[i].remark)/2, list[i].remark);
+            puts("|===|======================|=====================|=======================|==================|=================|====================|==================|================|==========================================|");
             i++;
         }
 
@@ -118,7 +132,9 @@ void setApplicants(struct Applicant newApplicants[], int size)
             fprintf(f, "email=%s\n", newApplicants[i].email);
             fprintf(f, "phone=%s\n", newApplicants[i].phone);
             fprintf(f, "price=%s\n", newApplicants[i].price);
-            fprintf(f, "date=%s\n", newApplicants[i].delivery_date);
+            fprintf(f, "day=%s\n", newApplicants[i].date.day);
+            fprintf(f, "month=%s\n", newApplicants[i].date.month);
+            fprintf(f, "year=%s\n", newApplicants[i].date.year);
             fprintf(f, "remark=%s\n", newApplicants[i].remark);
             fprintf(f, "country=%s\n", newApplicants[i].addr.country);
             fprintf(f, "city=%s\n", newApplicants[i].addr.city);

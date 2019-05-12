@@ -14,14 +14,21 @@ struct Address
     char street[APPLICANT_BUF_SIZE];
 };
 
+struct Date
+{
+    char day[APPLICANT_BUF_SIZE];
+    char month[APPLICANT_BUF_SIZE];
+    char year[APPLICANT_BUF_SIZE];
+};
+
 struct Applicant
 {
     char name[APPLICANT_BUF_SIZE];
     char email[APPLICANT_BUF_SIZE];
     char phone[APPLICANT_BUF_SIZE];
     char price[APPLICANT_BUF_SIZE];
-    char delivery_date[APPLICANT_BUF_SIZE];
     char remark[APPLICANT_BUF_SIZE];
+    struct Date date;
     struct Address addr;
 };
 
