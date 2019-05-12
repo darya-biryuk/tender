@@ -34,15 +34,18 @@ void userMenu()
             sort();
             break;
         case 5:
+            task();
+            break;
+        case 6:
             system("sl");
             system("clear");
             break;
-        case 6:
+        case 7:
             getApplicants();
             getProducts();
             printf("Списки данных обновлены.\n\n");
             break;
-        case 7:
+        case 8:
             fflush(stdin);
             getchar();
             printf("Выход в окно авторизации.\n\n");
@@ -60,9 +63,10 @@ void userHelp()
         printf("2.Вывести список товаров\n");
         printf("3.Поиск\n");
         printf("4.Сортировка\n");
-        printf("5.Запустить паровозик\n");
-        printf("6.Обновить списки данных\n");
-        printf("7.Выход\n");
+        printf("5.Топ предложений\n");
+        printf("6.Запустить паровозик\n");
+        printf("7.Обновить списки данных\n");
+        printf("8.Выход\n");
 }
 
 void search()
@@ -234,6 +238,51 @@ void sort()
     printApplicant(list, APPLICANTS_LIST_SIZE);
 }
 
+void task()
+{
+    getApplicants();
+    struct topApplicants top[APPLICANTS_LIST_SIZE];
+    int topSize = 0;
 
+    for (int i = 0; i < APPLICANTS_LIST_SIZE; i++)
+    {
+        if (applicantIsEmpty(applicants[i]))
+            continue;
+        int applicantDays = stoi(applicants[i].date.day) + stoi(applicants[i].date.month) * 30 + (stoi(applicants[i].date.year) - 1970) * 365 - 19;
+        int deliveryStamp = applicantDays - getDaysSinceEpoch();
 
+        printf("days: %d\n", applicantDays);
+        printf("stamp: %d\n", deliveryStamp);
 
+        if (deliveryStamp <= 0)
+            continue;
+
+        int cost = stoi(applicants[i].price);
+        if (cost < 0)
+            continue;
+
+        int value = cost * cost + deliveryStamp * deliveryStamp * deliveryStamp;
+
+        top[topSize].index = i;
+        top[topSize].value = value;
+        topSize++;
+    }
+
+    struct Applicant result[APPLICANTS_LIST_SIZE];
+
+    for(int i = 0; i  < topSize; i++)
+        for(int j = topSize - 1; j >= i; j--)
+            if( top[j].value < top[i].value )
+            {
+                struct topApplicants a = top[i];
+                top[i] = top[j];
+                top[j] = a;
+            }
+
+    for (int i = 0; i < topSize; i++)
+    {
+        result[i] = applicants[top[i].index];
+    }
+
+    printApplicant(result, topSize);
+}

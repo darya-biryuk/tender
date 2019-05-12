@@ -8,5 +8,12 @@ void userMenu();
 void userHelp();
 void search();
 void sort();
+void task();
+
+struct topApplicants
+{
+    int index;
+    int value;
+};
 
 #endif // USERMENU_H

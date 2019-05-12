@@ -4,5 +4,7 @@
 #include <string.h>
 
 void clearStdin();
+int getDaysSinceEpoch();
+int stoi(char *str);
 
 #endif // SYSTOOLS_H
